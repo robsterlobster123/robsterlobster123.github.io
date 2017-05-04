@@ -1,0 +1,46 @@
+var osc =[];
+var notes = [47, 48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83, 84, 86, 88, 89, 91, 93, 95, 96, 98, 100, 101, 103, 105, 107, 108, 110]
+
+function setup(){
+  	for (var i = 0; i < 38; i++) {
+  		osc[i] = new p5.Oscillator();
+ 		osc[i].setType('sine'); //Set type to 'sine', 'triangle', 'sawtooth' or 'square'.
+  		osc[i].amp(0);
+ 		osc[i].start();
+ 		osc[i].freq(midiToFreq(notes[i]));
+	}
+}
+ 
+ $(document).ready(function(){
+
+
+$(".box").mouseenter(function(){
+	$(this).css("background-color", randomColor({
+			luminosity: 'bright',
+			hue: 'blue'
+		}));
+		var id = $(this).attr('id').substr(3, 2);
+		osc[id].amp(.5, .2);
+		//osc[id].freq(midiToFreq(random(notes)));
+	});
+$(".box").mouseleave(function(){
+	$(this).css("background-color", randomColor({
+		luminosity: 'light',
+		hue: 'blue'
+	}));
+		var id = $(this).attr('id').substr(3, 2);
+		osc[id].amp(0, .2);
+});
+/*$(".row1#one").mouseenter(function(){
+	osc.amp(1,.2);
+	});	
+$(".row1#one").mouseleave(function(){
+	osc.amp(0,.2);
+});
+$(".row1#two").mouseenter(function(){
+	osc2.amp(1,.2);
+	});	
+$(".row1#two").mouseleave(function(){
+	osc2.amp(0,.2);
+});*/
+});
